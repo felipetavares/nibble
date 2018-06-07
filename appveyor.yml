@@ -3,7 +3,7 @@ branches:
         - master 
 configuration: Release
 install:
-    - cd C:\projects\nibble
+    - cd %APPVEYOR_BUILD_FOLDER%
     - git submodule update --init --recursive
     - mkdir C:\deps
     - cd C:\deps
@@ -18,12 +18,12 @@ install:
     - appveyor DownloadFile %RCEDIT_URL% -FileName rcedit.exe
     - mv rcedit.exe bin\
     - set PATH=C:\deps\bin;%PATH%
-    - cd C:\projects\nibble
+    - cd %APPVEYOR_BUILD_FOLDER%
     - mkdir build
     - cd build
     - cmake ..
 after_build:
-    - cd C:\projects\nibble
+    - cd %APPVEYOR_BUILD_FOLDER%
     - copy build\bin\openal32.dll bin\
     - move bin nibble
     - rmdir nibble\Release /s /q
